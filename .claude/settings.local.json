@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer require *)",
+      "Bash(mkdir -p \"D:\\\\New folder\\\\admku\\\\pustaka\\\\sirkulib\\\\resources\\\\views\\\\auth\")",
+      "Bash(mkdir -p \"D:\\\\New folder\\\\admku\\\\pustaka\\\\sirkulib\\\\resources\\\\views\\\\layouts\")",
+      "Bash(mkdir -p \"D:\\\\New folder\\\\admku\\\\pustaka\\\\sirkulib\\\\resources\\\\views\\\\components\")",
+      "Bash(mkdir -p \"D:\\\\New folder\\\\admku\\\\pustaka\\\\sirkulib\\\\resources\\\\views\\\\dashboard\")",
+      "Bash(mkdir -p \"D:\\\\New folder\\\\admku\\\\pustaka\\\\sirkulib\\\\resources\\\\views\\\\errors\")",
+      "Bash(npm config *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(cmd.exe *)",
+      "Bash(dir *)",
+      "Bash(php artisan *)",
+      "Bash(/c/xampp/php/php artisan *)",
+      "Bash(/c/newappraporsmp2025/php/php.exe *)",
+      "Bash(find /c -name \"composer.phar\" -maxdepth 4)",
+      "Bash(find /c -name \"composer.bat\" -maxdepth 4)",
+      "Bash(composer *)",
+      "Bash(find /c -name \"composer.bat\" -maxdepth 5)",
+      "Bash(find /c -name \"composer.phar\" -maxdepth 5)",
+      "Bash(/c/Users/LAB-TIK/.config/herd/bin/php84/php.exe *)",
+      "Bash(curl *)",
+      "Bash(where php *)",
+      "Read(//d//**)",
+      "Bash(C:/Users/LAB-TIK/.config/herd/bin/php84/php.exe artisan *)",
+      "Bash(C:/Users/LAB-TIK/.config/herd/bin/php84/php.exe *)",
+      "PowerShell(Get-ChildItem -Path . -Directory | Where-Object { $_.Name -notlike 'vendor' -and $_.Name -notlike 'node_modules' } | Select-Object Name)"
+    ]
+  }
+}

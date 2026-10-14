@@ -1,0 +1,45 @@
+# Use FrankenPHP Alpine for production PHP runtime
+FROM dunglas/frankenphp:latest-alpine
+
+# Install system dependencies
+RUN apk add --no-cache \
+    composer \
+    nodejs \
+    npm \
+    postgresql-client \
+    && docker-php-ext-enable pdo_pgsql
+
+# Set working directory
+WORKDIR /app
+
+# Copy application files
+COPY . .
+
+# Install PHP dependencies (production, optimized)
+RUN composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction
+
+# Install Node dependencies and build assets
+RUN npm ci && npm run build
+
+# Create storage directories
+RUN mkdir -p storage/app storage/logs storage/framework/cache storage/framework/views \
+    && chmod -R 755 storage bootstrap/cache
+
+# Generate Laravel config cache for production
+RUN php artisan config:cache && php artisan route:cache
+
+# FrankenPHP will listen on PORT env var, default 80
+# Document root is /app/public for Laravel
+ENV DOCUMENT_ROOT=/app/public \
+    FRANKENPHP_CONFIG="worker ./public/index.php"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD php -r "exit(0 === @fsockopen('127.0.0.1', 80) ? 0 : 1);"
+
+EXPOSE 80
+
+CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]

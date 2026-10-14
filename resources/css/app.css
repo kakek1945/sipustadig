@@ -1,0 +1,154 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Design System Colors - Soft School Library Dashboard */
+    --color-app-background: #eef2f6;
+    --color-app-surface: #ffffff;
+    --color-app-surface-subtle: #f6f8fa;
+    --color-app-border: #d0d7de;
+    --color-app-border-muted: #d8dee4;
+    --color-app-text: #24292f;
+    --color-app-muted: #57606a;
+    --color-app-muted-light: #8c959f;
+
+    --color-app-primary: #0969da;
+    --color-app-primary-hover: #0757b5;
+
+    --color-app-success: #1f883d;
+    --color-app-success-hover: #1a7f37;
+    --color-app-success-surface: #dafbe1;
+
+    --color-app-danger: #cf222e;
+    --color-app-danger-hover: #a40e26;
+    --color-app-danger-surface: #ffebe9;
+
+    --color-app-warning: #9a6700;
+    --color-app-warning-surface: #fff8c5;
+
+    --color-app-info: #0969da;
+    --color-app-info-surface: #ddf4ff;
+
+    --color-app-topbar: #24292f;
+    --color-app-topbar-text: #ffffff;
+    --color-app-topbar-muted: #d0d7de;
+
+    /* Book status colors */
+    --color-book-available: #1f883d;
+    --color-book-borrowed: #0969da;
+    --color-book-overdue: #cf222e;
+    --color-book-damaged: #9a6700;
+    --color-book-lost: #6e7781;
+
+    /* Border radius */
+    --radius-app-sm: 6px;
+    --radius-app-md: 8px;
+    --radius-app-lg: 12px;
+    --radius-app-pill: 999px;
+
+    /* Box shadow */
+    --shadow-app-card: 0 1px 0 rgba(27, 31, 36, .04);
+}
+
+/* Custom styles */
+[x-cloak] {
+    display: none !important;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #eef2f6;
+    color: #24292f;
+}
+
+/* Custom scrollbar - matching design system */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f6f8fa;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d0d7de;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8c959f;
+}
+
+/* Animation classes */
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+.sidebar-compact a {
+    gap: 0.5rem !important;
+    padding: 0.375rem 0.625rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
+}
+
+.sidebar-compact svg {
+    width: 1rem !important;
+    height: 1rem !important;
+    flex-shrink: 0;
+}
+
+.sidebar-compact > div {
+    padding-top: 0.375rem !important;
+}
+
+.sidebar-compact > div p {
+    padding-left: 0.625rem !important;
+    padding-right: 0.625rem !important;
+    font-size: 9px !important;
+    line-height: 0.75rem !important;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Print styles for QR labels */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .print-label {
+        page-break-inside: avoid;
+    }
+}
