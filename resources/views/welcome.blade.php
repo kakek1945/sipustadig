@@ -116,7 +116,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 items-start">
                         <div class="bg-app-background border border-app-border rounded-lg p-5 text-center">
                             @if($profile['principal_photo'])
-                                <img src="{{ Storage::disk(config('filesystems.default'))->url($profile['principal_photo']) }}" alt="Foto kepala sekolah" class="w-36 h-36 rounded-full object-cover mx-auto border border-app-border">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::disk(config('filesystems.uploads'))->url($profile['principal_photo']) }}" alt="Foto kepala sekolah" class="w-36 h-36 rounded-full object-cover mx-auto border border-app-border">
                             @else
                                 <div class="w-36 h-36 rounded-full bg-app-surface-subtle border border-app-border mx-auto flex items-center justify-center text-app-muted text-sm px-4">
                                     Foto Kepala Sekolah

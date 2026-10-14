@@ -33,7 +33,7 @@
             <div class="flex flex-col sm:flex-row items-start gap-6 pb-6 border-b border-gray-100">
                 <div class="w-32 h-44 bg-gray-50 rounded-lg border-2 border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0" id="cover-preview-container">
                     @if($book->cover_image)
-                        <img src="{{ Storage::disk(config('filesystems.default'))->url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
+                        <img src="{{ \Illuminate\Support\Facades\Storage::disk(config('filesystems.uploads'))->url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
                     @else
                         <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>

@@ -10,7 +10,7 @@
     "SESSION_DRIVER": "database",
     "CACHE_STORE": "database",
     "QUEUE_CONNECTION": "sync",
-    "FILESYSTEM_DISK": "s3"
+    "UPLOADS_DISK": "s3"
   },
   "functions": {
     "public/index.php": {

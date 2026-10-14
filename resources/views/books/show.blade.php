@@ -41,7 +41,7 @@
                 <!-- Cover Image -->
                 <div class="w-full h-80 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden mb-6">
                     @if($book->cover_image)
-                        <img src="{{ Storage::disk(config('filesystems.default'))->url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
+                        <img src="{{ \Illuminate\Support\Facades\Storage::disk(config('filesystems.uploads'))->url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
                     @else
                         <div class="text-center p-6">
                             <svg class="w-20 h-20 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

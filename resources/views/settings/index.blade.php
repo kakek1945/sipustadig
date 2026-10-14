@@ -168,7 +168,7 @@
                     <label class="block text-sm font-semibold text-app-text mb-1">Foto Kepala Sekolah</label>
                     <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
                         @if($value('library.principal_photo'))
-                            <img src="{{ Storage::disk(config('filesystems.default'))->url($value('library.principal_photo')) }}" alt="Foto kepala sekolah" class="w-24 h-24 rounded-md object-cover border border-app-border">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::disk(config('filesystems.uploads'))->url($value('library.principal_photo')) }}" alt="Foto kepala sekolah" class="w-24 h-24 rounded-md object-cover border border-app-border">
                         @else
                             <div class="w-24 h-24 rounded-md border border-dashed border-app-border flex items-center justify-center text-xs text-app-muted text-center px-2">Belum ada foto</div>
                         @endif

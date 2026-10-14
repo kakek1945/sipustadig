@@ -34,7 +34,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Foto</label>
                     <div class="w-32 h-32 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center cursor-pointer hover:border-indigo-500 transition-colors overflow-hidden" id="photo-preview-container">
                         @if($member->photo)
-                            <img id="photo-preview" src="{{ Storage::disk(config('filesystems.default'))->url($member->photo) }}" alt="{{ $member->name }}" class="w-full h-full object-cover">
+                            <img id="photo-preview" src="{{ \Illuminate\Support\Facades\Storage::disk(config('filesystems.uploads'))->url($member->photo) }}" alt="{{ $member->name }}" class="w-full h-full object-cover">
                         @else
                             <div id="photo-placeholder" class="text-center">
                                 <svg class="w-8 h-8 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">

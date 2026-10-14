@@ -111,7 +111,7 @@
                                 <div class="flex items-center gap-3">
                                     <div class="w-9 h-9 bg-app-info-surface rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
                                         @if($member->photo)
-                                            <img src="{{ Storage::disk(config('filesystems.default'))->url($member->photo) }}" alt="{{ $member->name }}" class="w-full h-full object-cover">
+                                            <img src="{{ \Illuminate\Support\Facades\Storage::disk(config('filesystems.uploads'))->url($member->photo) }}" alt="{{ $member->name }}" class="w-full h-full object-cover">
                                         @else
                                             <span class="text-app-primary font-semibold text-sm">{{ substr($member->name, 0, 1) }}</span>
                                         @endif

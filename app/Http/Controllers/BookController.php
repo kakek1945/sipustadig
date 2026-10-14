@@ -62,7 +62,7 @@ class BookController extends Controller
 
             // Handle cover image upload
             if ($request->hasFile('cover_image')) {
-                $data['cover_image'] = $request->file('cover_image')->store('covers/books', config('filesystems.default'));
+                $data['cover_image'] = $request->file('cover_image')->store('covers/books', config('filesystems.uploads'));
             }
 
             $book = $this->bookService->create($data);
@@ -123,7 +123,7 @@ class BookController extends Controller
             // Handle cover image upload
             if ($request->hasFile('cover_image')) {
                 // Delete old cover if exists
-                $disk = config('filesystems.default');
+                $disk = config('filesystems.uploads');
                 if ($book->cover_image && Storage::disk($disk)->exists($book->cover_image)) {
                     Storage::disk($disk)->delete($book->cover_image);
                 }

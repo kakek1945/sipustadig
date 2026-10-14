@@ -91,7 +91,7 @@ class SettingController extends Controller
 
         if ($request->hasFile('library.principal_photo')) {
             $oldPhoto = $this->settingsService->get('library.principal_photo', '');
-            $disk = config('filesystems.default');
+            $disk = config('filesystems.uploads');
             if ($oldPhoto && Storage::disk($disk)->exists($oldPhoto)) {
                 Storage::disk($disk)->delete($oldPhoto);
             }

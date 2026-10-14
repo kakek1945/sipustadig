@@ -103,7 +103,7 @@ class BookService
             }
 
             // Delete cover image if it exists
-            $disk = config('filesystems.default');
+            $disk = config('filesystems.uploads');
             if ($book->cover_image && Storage::disk($disk)->exists($book->cover_image)) {
                 Storage::disk($disk)->delete($book->cover_image);
             }

@@ -51,7 +51,7 @@ class MemberController extends Controller
 
             // Handle photo upload
             if ($request->hasFile('photo')) {
-                $data['photo'] = $request->file('photo')->store('photos/members', config('filesystems.default'));
+                $data['photo'] = $request->file('photo')->store('photos/members', config('filesystems.uploads'));
             }
 
             $member = $this->memberService->create($data);
@@ -121,7 +121,7 @@ class MemberController extends Controller
             // Handle photo upload
             if ($request->hasFile('photo')) {
                 // Delete old photo if exists
-                $disk = config('filesystems.default');
+                $disk = config('filesystems.uploads');
                 if ($member->photo && Storage::disk($disk)->exists($member->photo)) {
                     Storage::disk($disk)->delete($member->photo);
                 }
