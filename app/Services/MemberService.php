@@ -86,7 +86,8 @@ class MemberService
 
             // Calculate expiry date
             if (!empty($data['join_date'])) {
-                $validityYears = app('settings')->get('member.card_validity_years', 3);
+                $setting = app('settings')->getSetting('member.card_validity_years');
+                $validityYears = $setting['value'] ?? 3;
                 $data['expired_date'] = \Carbon\Carbon::parse($data['join_date'])->addYears($validityYears)->toDateString();
             }
 
