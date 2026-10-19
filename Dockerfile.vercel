@@ -35,14 +35,9 @@ COPY . .
 COPY --from=vendor /app/vendor ./vendor
 COPY --from=assets /app/public/build ./public/build
 
-# Generate Laravel package manifests without caching environment-bound config.
-RUN php artisan package:discover --ansi --no-interaction \
-    && mkdir -p \
-        /tmp/storage/framework/cache/data \
-        /tmp/storage/framework/sessions \
-        /tmp/storage/framework/views \
-        /tmp/storage/logs \
-    && chmod -R 777 /tmp/storage
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Vercel exposes port 80 to container traffic. Laravel writes only to /tmp.
 ENV SERVER_NAME=:80 \
@@ -51,4 +46,4 @@ ENV SERVER_NAME=:80 \
 
 EXPOSE 80
 
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
+ENTRYPOINT ["docker-entrypoint.sh"]

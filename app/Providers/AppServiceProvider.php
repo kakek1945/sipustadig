@@ -28,6 +28,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Vercel memakai filesystem sementara; pastikan Blade punya path valid saat runtime.
+        $compiledPath = env('VIEW_COMPILED_PATH', storage_path('framework/views'));
+
+        if (! is_dir($compiledPath)) {
+            mkdir($compiledPath, 0777, true);
+        }
+
+        config(['view.compiled' => $compiledPath]);
     }
 }
