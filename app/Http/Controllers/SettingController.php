@@ -18,7 +18,9 @@ class SettingController extends Controller
     {
         abort_unless(request()->user()->hasPermission('manage_settings'), 403);
 
-        $settings = $this->settingsService->all();
+        $settings = collect($this->settingsService->all())
+            ->map(fn (array $setting) => (object) $setting)
+            ->all();
 
         return view('settings.index', compact('settings'));
     }

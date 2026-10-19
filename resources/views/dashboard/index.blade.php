@@ -118,7 +118,9 @@
                 <h2 class="text-base font-semibold text-app-text">Tren Peminjaman</h2>
                 <span class="text-xs text-app-muted">7 hari</span>
             </div>
-            <canvas id="loanTrendChart" height="160" data-labels='@json($loan_trend["labels"] ?? [])' data-values='@json($loan_trend["values"] ?? [])'></canvas>
+            <div class="w-full h-40 sm:h-48 md:h-56 lg:h-64">
+                <canvas id="loanTrendChart" class="w-full h-full" data-labels='@json($loan_trend["labels"] ?? [])' data-values='@json($loan_trend["values"] ?? [])'></canvas>
+            </div>
         </div>
 
         <div class="bg-app-surface border border-app-border rounded-md p-4 shadow-[0_1px_0_rgba(27,31,36,0.04)]">
@@ -126,7 +128,9 @@
                 <h2 class="text-base font-semibold text-app-text">Sebaran Kategori</h2>
                 <span class="text-xs text-app-muted">Top 6</span>
             </div>
-            <canvas id="categoryChart" height="160" data-labels='@json($category_distribution["labels"] ?? [])' data-values='@json($category_distribution["values"] ?? [])'></canvas>
+            <div class="w-full h-40 sm:h-48 md:h-56 lg:h-64">
+                <canvas id="categoryChart" class="w-full h-full" data-labels='@json($category_distribution["labels"] ?? [])' data-values='@json($category_distribution["values"] ?? [])'></canvas>
+            </div>
         </div>
     </div>
 
@@ -214,13 +218,15 @@
         const labels = JSON.parse(canvas.dataset.labels || '[]');
         const values = JSON.parse(canvas.dataset.values || '[]');
         const context = canvas.getContext('2d');
-        const width = canvas.clientWidth;
-        const height = canvas.height;
+        const width = canvas.parentElement?.clientWidth || canvas.clientWidth;
+        const height = canvas.parentElement?.clientHeight || 160;
         const ratio = window.devicePixelRatio || 1;
+
+        if (!width || !height) return;
 
         canvas.width = width * ratio;
         canvas.height = height * ratio;
-        context.scale(ratio, ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
         context.clearRect(0, 0, width, height);
 
         const max = Math.max(...values, 1);
@@ -243,9 +249,12 @@
         });
     }
 
-    window.addEventListener('load', () => {
+    function drawDashboardCharts() {
         drawBarChart('loanTrendChart', '#0969da');
         drawBarChart('categoryChart', '#1f883d');
-    });
+    }
+
+    window.addEventListener('load', drawDashboardCharts);
+    window.addEventListener('resize', drawDashboardCharts);
 </script>
 @endpush

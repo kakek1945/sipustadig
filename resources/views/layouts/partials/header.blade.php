@@ -1,6 +1,18 @@
 <div x-data="{ open: false, notificationsOpen: false }" class="flex items-center justify-between h-16 px-4 md:px-6">
     <!-- Left side - Page title -->
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3 md:gap-4">
+        <button
+            type="button"
+            class="lg:hidden -ml-1 rounded-md p-2 text-app-muted hover:bg-app-surface-subtle hover:text-app-text"
+            aria-label="Buka navigasi"
+            aria-controls="sidebar"
+            :aria-expanded="sidebarOpen.toString()"
+            @click="sidebarOpen = !sidebarOpen"
+        >
+            <svg class="h-6 w-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
         <h1 class="text-lg md:text-xl font-semibold text-app-text">@yield('title', 'Dashboard')</h1>
     </div>
 

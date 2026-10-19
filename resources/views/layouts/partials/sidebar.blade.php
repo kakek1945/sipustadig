@@ -1,9 +1,9 @@
 <div class="flex flex-col h-full">
     <!-- Logo/Brand -->
     <div class="flex items-center h-12 px-3 border-b border-app-topbar/80">
-        <button type="button" class="lg:hidden p-1.5 -ml-1.5 text-app-topbar-muted hover:text-white hover:bg-white/10 rounded-md mr-1.5" aria-label="Buka atau tutup navigasi" aria-controls="sidebar" :aria-expanded="sidebarOpen.toString()" @click="sidebarOpen = !sidebarOpen">
+        <button type="button" class="lg:hidden p-1.5 -ml-1.5 text-app-topbar-muted hover:text-white hover:bg-white/10 rounded-md mr-1.5" aria-label="Tutup navigasi" aria-controls="sidebar" :aria-expanded="sidebarOpen.toString()" @click="sidebarOpen = false">
             <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6 6 18"/>
             </svg>
         </button>
         <a href="{{ route('dashboard') }}" class="flex items-center gap-2">

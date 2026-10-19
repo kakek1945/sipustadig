@@ -61,33 +61,32 @@ class SettingsService
             return $default;
         }
 
-        return match ($setting->type) {
-            'number' => (float) $setting->value,
-            'boolean' => filter_var($setting->value, FILTER_VALIDATE_BOOLEAN),
-            'json' => json_decode($setting->value, true),
-            default => $setting->value,
+        return match ($setting['type']) {
+            'number' => (float) $setting['value'],
+            'boolean' => filter_var($setting['value'], FILTER_VALIDATE_BOOLEAN),
+            'json' => json_decode($setting['value'], true),
+            default => $setting['value'],
         };
     }
 
     /**
      * Get setting model.
      */
-    public function getSetting(string $key): ?Setting
+    public function getSetting(string $key): ?array
     {
         $cacheKey = "setting.{$key}";
 
-        if (Cache::has($cacheKey)) {
-            $setting = Cache::get($cacheKey);
-
-            if ($setting instanceof Setting || $setting === null) {
-                return $setting;
-            }
-
-            Cache::forget($cacheKey);
+        $setting = Cache::get($cacheKey);
+        if (is_array($setting) || $setting === null) {
+            return $setting;
         }
 
+        Cache::forget($cacheKey);
+
         return Cache::remember($cacheKey, 3600, function () use ($key) {
-            return Setting::where('key', $key)->first();
+            $setting = Setting::where('key', $key)->first();
+
+            return $setting?->only(['key', 'value', 'type', 'description']);
         });
     }
 
@@ -149,14 +148,19 @@ class SettingsService
         }
 
         return Cache::remember($cacheKey, 3600, function () {
-            $settings = Setting::all()->keyBy('key')->all();
+            $settings = Setting::query()
+                ->get(['key', 'value', 'type', 'description'])
+                ->keyBy('key')
+                ->map(fn (Setting $setting) => $setting->only(['key', 'value', 'type', 'description']))
+                ->all();
 
             foreach ($this->defaults as $key => $config) {
                 if (!isset($settings[$key])) {
-                    $settings[$key] = (object) [
+                    $settings[$key] = [
                         'key' => $key,
                         'value' => $config['value'],
                         'type' => $config['type'],
+                        'description' => $config['description'],
                     ];
                 }
             }
