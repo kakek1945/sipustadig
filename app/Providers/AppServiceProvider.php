@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\SettingsService;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS in production (Vercel, staging)
+        if ($this->app->environment(['production', 'staging'])) {
+            URL::forceScheme('https');
+        }
+
         // Vercel memakai filesystem sementara; pastikan Blade punya path valid saat runtime.
         $compiledPath = env('VIEW_COMPILED_PATH', storage_path('framework/views'));
 
